@@ -39,7 +39,7 @@ Node* createNode(int x)
 }
 void InsertValue(Node *&head, int x, int k)
 {
-    if(k<0 || head == nullptr)
+    if(k<=0 || head == nullptr)
     {
         insertFirst(head,x);
         return;
@@ -77,7 +77,7 @@ void DeleteLast(Node *&head)
 }
 void Deletevalue(Node *&head, int k)
 {
-    if( k<0 || head == nullptr) return;
+    if( k<=0 || head == nullptr) return;
     if( k==0)
     {
         DeleteFisrt(head);
