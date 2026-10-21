@@ -1,4 +1,20 @@
-#include "QueueArray.h"
+#include <iostream>
+#include "../week1/List.h" 
+
+using namespace std;
+
+class QueueArray {
+private:
+    List a;
+
+public:
+    QueueArray();
+    bool isEmpty();
+    void enqueue(int data);
+    int dequeue();
+    int peek(); 
+    int size();
+};
 
 QueueArray::QueueArray() 
 {

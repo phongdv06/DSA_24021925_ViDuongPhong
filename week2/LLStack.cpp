@@ -1,4 +1,19 @@
-#include "LLStack.h"
+#include <iostream>
+#include "../week1/LList.h" 
+
+using namespace std;
+class LLStack {
+private:
+    Node* head;
+
+public:
+    LLStack();
+    bool isEmpty();
+    void push(int data);
+    int pop();
+    int top();  
+    int size();
+};
 
 LLStack::LLStack() 
 {

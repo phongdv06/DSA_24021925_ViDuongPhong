@@ -1,4 +1,19 @@
-#include "LLQueue.h"
+#include <iostream>
+#include "../week1/LList.h" 
+
+using namespace std;
+class LLQueue {
+private:
+    Node* head;
+
+public:
+    LLQueue();
+    bool isEmpty();
+    void enqueue(int data);
+    int dequeue();
+    int peek(); 
+    int size();
+};
 
 LLQueue::LLQueue() 
 {

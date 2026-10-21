@@ -1,4 +1,20 @@
-#include "StackArray.h"
+#include <iostream>
+#include "../week1/List.h" 
+
+using namespace std;
+
+class StackArray {
+private:
+    List a;
+
+public:
+    StackArray();
+    bool isEmpty();
+    void push(int data);
+    int pop();
+    int top();  
+    int size(); 
+};
 
 StackArray::StackArray() 
 {
