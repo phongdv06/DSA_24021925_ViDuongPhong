@@ -3,68 +3,56 @@
 
 using namespace std;
 
-class QueueArray {
-private:
+struct QueueArray {
     List a;
-
-public:
-    QueueArray();
-    bool isEmpty();
-    void enqueue(int data);
-    int dequeue();
-    int peek(); 
-    int size();
 };
-
-QueueArray::QueueArray() 
+void initQueue(QueueArray &q) 
 {
-    initList(a);
+    initList(q.a);
+}
+bool isEmpty(QueueArray q) 
+{
+    return q.a.size == 0;
 }
 
-bool QueueArray::isEmpty() 
+void enqueue(QueueArray &q, int data)
 {
-    return a.size == 0;
+    insertLast(q.a, data);
 }
-
-void QueueArray::enqueue(int data) 
+int dequeue(QueueArray &q) 
 {
-    insertLast(a, data);
-}
-
-int QueueArray::dequeue() 
-{
-    if (isEmpty()) return -1;
-    int frontValue = a.a[0];
-    deleteFirst(a);
+    if (isEmpty(q)) return -1;
+    int frontValue = q.a.a[0]; 
+    deleteFirst(q.a);          
     return frontValue;
 }
-int QueueArray::peek() 
+int peek(QueueArray q) 
 {
-    if (isEmpty()) return -1;
-    return a.a[0];
+    if (isEmpty(q)) return -1;
+    return q.a.a[0];
 }
 
-int QueueArray::size() 
+int size(QueueArray q) 
 {
-    return a.size;
+    return q.a.size;
 }
 int main()
 {
     QueueArray queueArr;
-    
-    cout << "Queue rỗng? " << (queueArr.isEmpty() ? "True" : "False") << endl;
+    initQueue(queueArr);
+    cout << "Queue rỗng? " << (isEmpty(queueArr) ? "True" : "False") << endl;
 
     cout << "Enqueue: 100, 200, 300" << endl;
-    queueArr.enqueue(100);
-    queueArr.enqueue(200);
-    queueArr.enqueue(300);
+    enqueue(queueArr,100);
+    enqueue(queueArr,200);
+    enqueue(queueArr,300);
 
-    cout << "Kích thước (size) hiện tại: " << queueArr.size()  << endl;
-    cout << "Phần tử đầu tiên (peek): " << queueArr.peek() << endl;
+    cout << "Kích thước (size) hiện tại: " << size(queueArr)  << endl;
+    cout << "Phần tử đầu tiên (peek): " << peek(queueArr) << endl;
 
-    cout << "Dequeue phần tử: " << queueArr.dequeue()  << endl;
-    cout << "Kích thước sau khi Dequeue: " << queueArr.size()  << endl;
-    cout << "Phần tử đầu tiên (peek) mới: " << queueArr.peek()  << endl;
-    cout << "Queue rỗng? " << (queueArr.isEmpty() ? "True" : "False") << endl;
+    cout << "Dequeue phần tử: " << dequeue(queueArr)  << endl;
+    cout << "Kích thước sau khi Dequeue: " << size(queueArr)  << endl;
+    cout << "Phần tử đầu tiên (peek) mới: " << peek(queueArr)  << endl;
+    cout << "Queue rỗng? " << (isEmpty(queueArr) ? "True" : "False") << endl;
     return 0;
 }

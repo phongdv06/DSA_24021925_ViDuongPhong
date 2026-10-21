@@ -2,50 +2,39 @@
 #include "../week1/LList.h" 
 
 using namespace std;
-class LLQueue {
-private:
+struct LLQueue {
     Node* head;
-
-public:
-    LLQueue();
-    bool isEmpty();
-    void enqueue(int data);
-    int dequeue();
-    int peek(); 
-    int size();
 };
 
-LLQueue::LLQueue() 
+void initLLQueue(LLQueue &q) 
 {
-    head = nullptr;
+    q.head = nullptr;
 }
 
-bool LLQueue::isEmpty() 
+bool isEmpty(LLQueue q) 
 {
-    return head == nullptr;
+    return q.head == nullptr;
 }
-
-void LLQueue::enqueue(int data) 
+void enqueue(LLQueue &q, int data) 
 {
-    insertLast(head, data);
+    insertLast(q.head, data); 
 }
-
-int LLQueue::dequeue() 
+int dequeue(LLQueue &q) 
 {
-    if (isEmpty()) return -1;
-    int frontValue = head->data;
-    DeleteFisrt(head);
+    if (isEmpty(q)) return -1;
+    int frontValue = q.head->data; 
+    DeleteFisrt(q.head);           
     return frontValue;
 }
-int LLQueue::peek() 
+int peek(LLQueue q) 
 {
-    if (isEmpty()) return -1;
-    return head->data;
+    if (isEmpty(q)) return -1;
+    return q.head->data;
 }
-int LLQueue::size() 
+int size(LLQueue q) 
 {
     int count = 0;
-    Node* temp = head;
+    Node* temp = q.head;
     while (temp != nullptr) {
         count++;
         temp = temp->next;
@@ -55,20 +44,20 @@ int LLQueue::size()
 int main()
 {
     LLQueue llQueue;
-    
-    cout << "Queue rỗng? " << (llQueue.isEmpty() ? "True" : "False") << endl;
+    initLLQueue(llQueue);
+    cout << "Queue rỗng? " << (isEmpty(llQueue) ? "True" : "False") << endl;
 
     cout << "Enqueue: 50, 150, 250" << endl;
-    llQueue.enqueue(50);
-    llQueue.enqueue(150);
-    llQueue.enqueue(250);
+    enqueue(llQueue,50);
+    enqueue(llQueue,150);
+    enqueue(llQueue,250);
 
-    cout << "Kích thước (size) hiện tại: " << llQueue.size()  << endl;
-    cout << "Phần tử đầu tiên (peek): " << llQueue.peek()  << endl;
+    cout << "Kích thước (size) hiện tại: " << size(llQueue)  << endl;
+    cout << "Phần tử đầu tiên (peek): " << peek(llQueue)  << endl;
 
-    cout << "Dequeue phần tử: " << llQueue.dequeue()  << endl;
-    cout << "Kích thước sau khi Dequeue: " << llQueue.size()  << endl;
-    cout << "Phần tử đầu tiên (peek) mới: " << llQueue.peek()  << endl;
-    cout << "Queue rỗng? " << (llQueue.isEmpty() ? "True" : "False") << endl;
+    cout << "Dequeue phần tử: " << dequeue(llQueue)  << endl;
+    cout << "Kích thước sau khi Dequeue: " << size(llQueue)  << endl;
+    cout << "Phần tử đầu tiên (peek) mới: " << peek(llQueue)  << endl;
+    cout << "Queue rỗng? " << (isEmpty(llQueue) ? "True" : "False") << endl;
     return 0;
 }

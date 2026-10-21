@@ -3,67 +3,57 @@
 
 using namespace std;
 
-class StackArray {
-private:
+struct StackArray 
+{
     List a;
-
-public:
-    StackArray();
-    bool isEmpty();
-    void push(int data);
-    int pop();
-    int top();  
-    int size(); 
 };
 
-StackArray::StackArray() 
+void initStack(StackArray &stack) 
 {
-    initList(a);
+    initList(stack.a); 
 }
 
-bool StackArray::isEmpty() 
+bool isEmpty(StackArray stack) 
 {
-    return a.size == 0;
+    return stack.a.size == 0;
 }
 
-void StackArray::push(int data) 
+void push(StackArray &stack, int data) 
 {
-    insertLast(a, data);
+    insertLast(stack.a, data);
 }
 
-int StackArray::pop() 
+int pop(StackArray &stack) 
 {
-    if (isEmpty()) return -1;
-    int topValue = a.a[a.size - 1];
-    deleteLast(a);
+    if (isEmpty(stack)) return -1;
+    int topValue = stack.a.a[stack.a.size - 1]; 
+    deleteLast(stack.a);                        
     return topValue;
 }
-int StackArray::top() 
+int top(StackArray stack) 
 {
-    if (isEmpty()) return -1;
-    return a.a[a.size - 1];
+    if (isEmpty(stack)) return -1;
+    return stack.a.a[stack.a.size - 1];
 }
 
-int StackArray::size() 
+int size(StackArray stack) 
 {
-    return a.size;
+    return stack.a.size;
 }
-int main() {
-    StackArray stackArr;
-    cout << "Stack rỗng? " << (stackArr.isEmpty() ? "True" : "False") << endl;
-
+int main() 
+{
+    StackArray myStack;
+    initStack(myStack);
+    cout << "Stack rỗng? " << (isEmpty(myStack) ? "True" : "False") << endl;
     cout << "Push: 10, 20, 30" << endl;
-    stackArr.push(10);
-    stackArr.push(20);
-    stackArr.push(30);
-
-    cout << "Kích thước (size) hiện tại: " << stackArr.size() << endl;
-    cout << "Phần tử trên cùng (top): " << stackArr.top() << endl;
-
-    cout << "Pop phần tử: " << stackArr.pop() << endl;
-    cout << "Kích thước sau khi Pop: " << stackArr.size() << endl;
-    cout << "Phần tử trên cùng (top) mới: " << stackArr.top() << endl;
-    cout << "Stack rỗng? " << (stackArr.isEmpty() ? "True" : "False") << endl;
-
+    push(myStack,10);
+    push(myStack,20);
+    push(myStack,30);
+    cout << "Kích thước (size) hiện tại: " << size(myStack) << endl;
+    cout << "Phần tử trên cùng (top): " << top(myStack) << endl;
+    cout << "Pop phần tử: " << pop(myStack) << endl;
+    cout << "Kích thước sau khi Pop: " << size(myStack) << endl;
+    cout << "Phần tử trên cùng (top) mới: " << top(myStack) << endl;
+    cout << "Stack rỗng? " << (isEmpty(myStack) ? "True" : "False") << endl;
     return 0;
 }
