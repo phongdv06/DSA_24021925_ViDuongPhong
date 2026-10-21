@@ -1,105 +1,140 @@
 #include <iostream>
 using namespace std;
 
-int arr[100];
-int n=0;
-
-void getIdArr(int index) {
-    cout << arr[index] << endl;
-}
-void insertLast(int x)
+struct List 
 {
-    arr[n] = x;
-    n++;
+    int size;
+    int a[100];
+};
+
+void initList(List &L) 
+{
+    L.size = 0;
 }
 
-void insertFirst(int x)
+void getIdArr(List L, int index) 
 {
-    for(int i=n; i>0; i--)
+    if (index >= 0 && index < L.size) 
     {
-        arr[i]=arr[i-1];
+        cout << L.a[index] << endl;
     }
-    arr[0]=x;
-    n++;
 }
-void insertValue(int x, int index)
-{
-    for(int i=n;i>index;i--)
-    {
-        arr[i]=arr[i-1];
-    }
-    arr[index]=x;
-    n++;
-}
-void deleteFirst() 
-{
-    for (int i = 0; i < n - 1; i++) {
-        arr[i] = arr[i + 1];
-    }
-    n--;
-}
-void deleteLast() 
-{
-    n--;
-}
-void deleteIdArr(int index) 
-{
-    for (int i = index; i < n - 1; i++) {
-        arr[i] = arr[i + 1];
-    }
 
-    n--;
-}
-void printForward() 
+void insertLast(List &L, int x) 
 {
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
+    if (L.size < 100) 
+    { 
+        L.a[L.size] = x;
+        L.size++;
+    }
+}
+
+void insertFirst(List &L, int x) 
+{
+    if (L.size < 100) {
+        for(int i = L.size; i > 0; i--) 
+        {
+            L.a[i] = L.a[i - 1];
+        }
+        L.a[0] = x;
+        L.size++;
+    }
+}
+
+void insertValue(List &L, int x, int index) 
+{
+    if (L.size < 100 && index >= 0 && index <= L.size) 
+    {
+        for(int i = L.size; i > index; i--) 
+        {
+            L.a[i] = L.a[i - 1];
+        }
+        L.a[index] = x;
+        L.size++;
+    }
+}
+
+void deleteFirst(List &L) 
+{
+    if (L.size > 0) 
+    { 
+        for (int i = 0; i < L.size - 1; i++) 
+        {
+            L.a[i] = L.a[i + 1];
+        }
+        L.size--;
+    }
+}
+
+void deleteLast(List &L) {
+    if (L.size > 0) {
+        L.size--;
+    }
+}
+
+void deleteIdArr(List &L, int index) {
+    if (L.size > 0 && index >= 0 && index < L.size) 
+    {
+        for (int i = index; i < L.size - 1; i++) 
+        {
+            L.a[i] = L.a[i + 1];
+        }
+        L.size--;
+    }
+}
+
+void printForward(List L) {
+    for (int i = 0; i < L.size; i++) 
+    {
+        cout << L.a[i] << " ";
     }
     cout << endl;
 }
-void printReverse() 
-{
-    for (int i = n - 1; i >= 0; i--) {
-        cout << arr[i] << " ";
+
+void printReverse(List L) {
+    for (int i = L.size - 1; i >= 0; i--) 
+    {
+        cout << L.a[i] << " ";
     }
     cout << endl;
 }
-int main()
-{
-    insertLast(10);
-    insertLast(20);
-    insertLast(30);
 
-    cout<<"In vi tri dau:"<<endl;
-    getIdArr(1);
-    cout<<"In xuôi mảng:"<<endl;
-    printForward();
+int main() {
+    List L;          
+    initList(L);     
 
-    cout<<"Chen 5 vao vi tri đầu:"<<endl;
+    insertLast(L, 10);
+    insertLast(L, 20);
+    insertLast(L, 30);
 
-    insertFirst(5);
+    cout << "In vi tri thu 1 (index 1):" << endl;
+    getIdArr(L, 1); 
+    
+    cout << "In xuoi mang:" << endl;
+    printForward(L);
 
-    printForward();
-    cout<<"Chen 15 vao vi tri thu 3:"<<endl;
+    cout << "Chen 5 vao vi tri dau:" << endl;
+    insertFirst(L, 5);
+    printForward(L);
+    
+    cout << "Chen 15 vao vi tri thu 3 (index 2):" << endl;
+    insertValue(L, 15, 2);
+    printForward(L);
+    
+    cout << "Xoa vi tri dau:" << endl;
+    deleteFirst(L);
+    printForward(L);
 
-    insertValue(15, 2);
+    cout << "Xoa vi tri cuoi:" << endl;
+    deleteLast(L);
+    printForward(L);
+    
+    cout << "Xoa vi tri thu 2 (index 1):" << endl;
+    deleteIdArr(L, 1);
+    printForward(L);
+    
+    cout << "In nguoc mang:" << endl;
+    printReverse(L);
 
-    printForward();
-    cout<<"Xoa vi tri dau:"<<endl;
-    deleteFirst();
-
-    printForward();
-
-    cout<<"Xoa vi tri cuôi:"<<endl;
-    deleteLast();
-
-    printForward();
-    cout<<"Xoa vi tri thu 2:"<<endl;
-    deleteIdArr(1);
-
-    printForward();
-    cout<<"In nguoc mang"<<endl;
-    printReverse();
-
-   
+    return 0;
 }
