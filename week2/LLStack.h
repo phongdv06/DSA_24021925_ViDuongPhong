@@ -1,19 +1,19 @@
-
 #ifndef LLSTACK_H
 #define LLSTACK_H
 
-#include "LinkedList.h"
+#include "LList.h" 
 
 class LLStack {
 private:
-    SLinkedList a;
+    Node* head;
 
 public:
     LLStack();
+    bool isEmpty();
     void push(int data);
     int pop();
-    int top();
-    bool isEmpty();
+    int top();  
+    int size();
 };
 
 #endif
