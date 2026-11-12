@@ -25,7 +25,7 @@ void heapSort(int a[], int n) {
     }
 }
 int main() {
-    int a[] = { -1, 12, 11, 13, 5, 6, 7 };
+    int a[] = { -1, 12, 11, 13, 5, 8, 7 };
     int n = 6; 
     cout << "Mang ban dau: ";
     for (int i = 1; i <= n; i++) cout << a[i] << " ";
